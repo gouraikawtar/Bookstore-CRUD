@@ -11,13 +11,14 @@
     function connect(){
         // Create our variables
         $servername = "localhost";
-        $dbname = "bookstore";
-        $username = "root";
-        $password = "";
+        $dbname = "bookstore";  // DB name, you can change it if you want
+        $username = ""; // insert DB username here
+        $password = ""; // insert DB password here
+        // IMPORTANT : the by default MySQL port is 3306, dont forget to check if it's the same for you or not, you might have different one !
 
         try {
             // Create a new connection
-            $pdo = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8;port=3308", $username, $password);
+            $pdo = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8;port=3306", $username, $password);
             // Set the PDO error mode to exception
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $pdo;
@@ -55,18 +56,18 @@
 
     function createBook($title, $author, $pages, $price){
         // Using exec()
-        /*$query = "INSERT INTO books (title, author, pages, price) VALUES ('$title','$author', '$pages', '$price')";
+        $query = "INSERT INTO books (title, author, pages, price) VALUES ('$title','$author', '$pages', '$price')";
         $pdo = connect();
         $res = $pdo->exec($query);
         $pdo = null;
-        return $res;*/
+        return $res;
 
         // Using Prepared statement
-        $pdo = connect();
+        /*$pdo = connect();
         $stm = $pdo->prepare("INSERT INTO books (title, author, pages, price) VALUES (?, ?, ?, ?)");
         $res = $stm->execute([$title, $author, $pages, $price]);
         $pdo = null;
-        return $res;
+        return $res;*/
     }
 
     function updateBook($id, $title, $author, $pages, $price){
